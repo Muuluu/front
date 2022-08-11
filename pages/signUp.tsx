@@ -11,8 +11,12 @@ import {
   Switch,
   useColorMode,
   useColorModeValue,
+  Link,
+  Center,
+  Text
 } from '@chakra-ui/react';
 import axios from 'axios';
+import { useRouter } from 'next/router';
 
 
 
@@ -30,7 +34,7 @@ const signUpPage = () => {
   const [ emails, setEmails] = useState([]);
   const [ reEnterpasswords, setReEnterPasswords] = useState([]);
   const [ phoneNums, setPhoneNums] = useState([]);
-  
+  const router = useRouter();
   return (
     <Flex h="100vh" alignItems="center" justifyContent="center">
       <Flex
@@ -75,8 +79,17 @@ const signUpPage = () => {
           mb={3}
           onChange={(e)=> {setPhoneNum(e.target.value)}}
         /> 
-        <Button onClick={()=>createUser()} colorScheme="teal" mb={8}>
+        
+        <Button onClick={()=>createUser() } colorScheme="teal" mb={8}>
           Sign Up
+        </Button>
+        <Flex>
+          <Center>
+            <Text>Already has account</Text>
+          </Center>
+        </Flex>
+        <Button onClick={()=>alreadyHasAcc() } colorScheme="teal" mb={8}>
+          Log In
         </Button>
         <FormControl display="flex" alignItems="center">
           <FormLabel htmlFor="dark_mode" mb="0">
@@ -92,6 +105,7 @@ const signUpPage = () => {
       </Flex>
     </Flex>
     
+    
   );
   function createUser() {
     setUsernames([...usernames, username])
@@ -102,7 +116,12 @@ const signUpPage = () => {
     .then(res => {
       setData(res.data);
    })
-}
+   router.push('/verification')
+  }
+
+  function alreadyHasAcc() {
+    router.push('/login')
+  }
 };
 
 
