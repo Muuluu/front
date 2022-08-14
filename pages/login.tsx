@@ -12,8 +12,10 @@ import {
   useColorMode,
   useColorModeValue,
 } from '@chakra-ui/react';
+import { useRouter } from 'next/router';
 
 const Login = () => {
+  const router = useRouter();
   const { toggleColorMode } = useColorMode();
   const formBackground = useColorModeValue('gray.100', 'gray.700');
   const [ password, setPassword] = useState("");
@@ -21,20 +23,7 @@ const Login = () => {
   const [ passwords, setPasswords] = useState([]);
   const [ usernames, setUsernames] = useState([]);
   const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(false);
-  let loadTodos =  ()  => {
-    console.log("load todos");
-    axios.post("http://localhost:5000/user/signIn")
-      .then(res => {
-         setPassword(res.data);
-      })
-  };
-  useEffect(() => {
-    console.log("effect")
-    setLoading(true);
-    loadTodos();
-  }, []);
-
+ 
   return (
     <Flex h="100vh" alignItems="center" justifyContent="center">
       <Flex
@@ -59,7 +48,7 @@ const Login = () => {
           mb={6}
           onChange={(e)=> {setPassword(e.target.value)}}
         />
-        <Button colorScheme="teal" mb={8}>
+        <Button onClick={()=>login() } colorScheme="teal" mb={8}>
           Log In
         </Button>
         <FormControl display="flex" alignItems="center">
@@ -76,5 +65,23 @@ const Login = () => {
       </Flex>
     </Flex>
   );
+  function login() {
+    setUsernames([...usernames, username])
+    setPasswords([...passwords, password])
+    axios.post("http://localhost:5000/user/signIn",{username: username, password:password})
+    .then(res => {
+      setData(res.data);
+      console.log(res.data)
+      localStorage.setItem("refresh_token", "refresh_token")
+      localStorage.setItem("access_token", "access_token")
+      localStorage.setItem("id", "id")
+   })
+   router.push('/')
+  }
+
+  function doenstHaveAcc() {
+    router.push('/signUp')
+  }
+  
 }
 export default Login;

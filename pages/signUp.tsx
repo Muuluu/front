@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import React from 'react';
-
 import {
   Flex,
   Heading,
@@ -13,12 +12,11 @@ import {
   useColorModeValue,
   Link,
   Center,
-  Text
+  Text,
+  getToken
 } from '@chakra-ui/react';
 import axios from 'axios';
 import { useRouter } from 'next/router';
-
-
 
 const signUpPage = () => {
   const { toggleColorMode } = useColorMode();
@@ -115,6 +113,8 @@ const signUpPage = () => {
     axios.post("http://localhost:5000/user/create",{username: username, password:password, email:email, phoneNum:phoneNum})
     .then(res => {
       setData(res.data);
+      console.log(res.data)
+      localStorage.setItem("id", "id")
    })
    router.push('/verification')
   }
