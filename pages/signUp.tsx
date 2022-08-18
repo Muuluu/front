@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import React from 'react';
-import {
+import { 
   Flex,
   Heading,
   Input,
@@ -10,11 +10,9 @@ import {
   Switch,
   useColorMode,
   useColorModeValue,
-  Link,
-  Center,
   Text,
-  getToken
-} from '@chakra-ui/react';
+  Center, } 
+from '@chakra-ui/react';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 
@@ -83,7 +81,7 @@ const signUpPage = () => {
         </Button>
         <Flex>
           <Center>
-            <Text>Already has account</Text>
+          <Text> Already have an account </Text>
           </Center>
         </Flex>
         <Button onClick={()=>alreadyHasAcc() } colorScheme="teal" mb={8}>

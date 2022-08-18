@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import {
+import { 
   Flex,
   Heading,
   Input,
@@ -10,8 +10,7 @@ import {
   FormLabel,
   Switch,
   useColorMode,
-  useColorModeValue,
-} from '@chakra-ui/react';
+  useColorModeValue, } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 
 const Login = () => {

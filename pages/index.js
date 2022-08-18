@@ -1,50 +1,11 @@
-import React from "react";
+import React from 'react';
+import ReactDOM from 'react-dom'
+import Routes from './Routes';
 
-function useStickyState(defaultValue, key) {
-  const [value, setValue] = React.useState(defaultValue);
-
-  React.useEffect(() => {
-    const stickyValue = window.localStorage.getItem(key);
-
-    if (stickyValue !== null) {
-      setValue(JSON.parse(stickyValue));
-    }
-  }, [key]);
-
-  React.useEffect(() => {
-    window.localStorage.setItem(key, JSON.stringify(value));
-  }, [key, value]);
-
-  return [value, setValue];
-}
-
-const Home = () => {
-  const [mode, setMode] = useStickyState("day", "mode");
-  return (
-    <div className="container">
-      <select onChange={ev => setMode(ev.target.value)} value={mode}>
-        <option value="day">Day</option>
-        <option value="week">Week</option>
-        <option value="month">Month</option>
-      </select>
-
-      <style jsx>{`
-        .container {
-          min-height: 100vh;
-          padding: 0 0.5rem;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        }
-      `}</style>
-    </div>
-  );
-};
-
-export default Home;
-
-
+ReactDOM.render(
+  <Routes />,
+  document.getElementById("root")
+)
 
 
 // import { useEffect, useState } from 'react'

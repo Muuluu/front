@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import {
+import { 
   Flex,
   Heading,
   Input,
@@ -9,8 +9,7 @@ import {
   FormLabel,
   Switch,
   useColorMode,
-  useColorModeValue,
-} from '@chakra-ui/react';
+  useColorModeValue, } from '@chakra-ui/react';
 import axios from 'axios';
 
 const Profile = () => {
